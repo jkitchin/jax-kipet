@@ -1,0 +1,41 @@
+kipetax
+Copyright (c) 2026 John Kitchin
+Licensed under the MIT License (see LICENSE).
+
+Relationship to KIPET
+---------------------
+
+kipetax is an independent reimplementation, inspired by KIPET, the Kinetic
+Parameter Estimation Toolkit:
+
+    https://github.com/kwmcbride/KIPET
+
+KIPET was developed by Kevin McBride, Christina Schenk, Michael Short,
+Jose Santiago Rodriguez, David M. Thierry, Salvador Garcia-Munoz and
+Lorenz T. Biegler, and is distributed under the GNU General Public License,
+version 3.
+
+kipetax contains no source code from KIPET. Its numerical core (discopt
+collocation, POUNCE-based NLP solves and covariance, variable projection,
+JAX-differentiable shooting) was written from scratch. To make migration
+easy, kipetax deliberately follows KIPET's user-facing interface: the
+ReactionModel method names and keyword arguments (parameter, component,
+state, add_ode, add_data, set_time, simulate, run_opt, ...) and the
+single-letter naming of result tables (Z, X, Y, S, P, ...). These interface
+conventions are reused for compatibility only.
+
+If you use kipetax, please also cite the KIPET papers that introduced the
+methods and interface it builds on:
+
+  C. Schenk, M. Short, J.S. Rodriguez, D. Thierry, L.T. Biegler,
+  S. Garcia-Munoz, W. Chen. Introducing KIPET: A novel open-source software
+  package for kinetic parameter estimation from experimental datasets
+  including spectra. Computers & Chemical Engineering 134 (2020) 106716.
+  https://doi.org/10.1016/j.compchemeng.2019.106716
+
+  M. Short, L.T. Biegler, S. Garcia-Munoz, W. Chen. Estimating variances and
+  kinetic parameters from spectra across multiple datasets using KIPET.
+  Chemometrics and Intelligent Laboratory Systems 203 (2020) 104012.
+  https://doi.org/10.1016/j.chemolab.2020.104012
+
+kipetax is not affiliated with or endorsed by the KIPET authors.

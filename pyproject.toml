@@ -1,0 +1,66 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "kipetax"
+version = "2.0.0"
+description = "Kinetic Parameter Estimation Toolkit (Pyomo-free, uses discopt)"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [
+    { name = "John Kitchin", email = "jkitchin@andrew.cmu.edu" },
+]
+keywords = [
+    "kinetics",
+    "parameter-estimation",
+    "reaction-engineering",
+    "dynamic-optimization",
+    "spectroscopy",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Chemistry",
+    "Intended Audience :: Science/Research",
+]
+dependencies = [
+    "numpy",
+    "scipy",
+    "pandas",
+    "discopt[jax]>=0.10",
+    "pounce-solver>=0.14",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "matplotlib",
+]
+docs = [
+    "sphinx>=7",
+    "furo",
+    "myst-parser",
+    "sphinx-autodoc-typehints",
+]
+
+[project.urls]
+Homepage = "https://github.com/jkitchin/jax-kipet"
+Repository = "https://github.com/jkitchin/jax-kipet"
+
+[tool.hatch.build.targets.wheel]
+packages = ["kipetax"]
+
+[tool.pytest.ini_options]
+testpaths = ["kipetax/tests"]
+markers = [
+    "slow: marks tests that require NLP solves and take >60s each",
+    "integration: marks full end-to-end integration tests",
+]
+filterwarnings = [
+    "ignore::UserWarning",
+    "ignore::DeprecationWarning",
+]

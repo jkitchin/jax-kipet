@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Virtual envs
+.venv/
+venv/
+
+# uv
+uv.lock
+
+# Test / tooling caches
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Sphinx docs build
+docs/_build/
+
+# OS
+.DS_Store
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Benchmarks / generated example output
+.benchmarks/
+Ex_1_simulation.png
+kipetax/examples/*.png
+
+# Reference PDFs kept locally, not in the repo
+papers/
+
+# Internal planning notes and generated example output (kept locally)
+PLAN.org
+Ex_2_estimation.png
