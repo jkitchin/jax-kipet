@@ -50,6 +50,7 @@ docs = [
 [project.urls]
 Homepage = "https://github.com/jkitchin/jax-kipet"
 Repository = "https://github.com/jkitchin/jax-kipet"
+Documentation = "https://kitchingroup.cheme.cmu.edu/jax-kipet/"
 
 [tool.hatch.build.targets.wheel]
 packages = ["kipetax"]

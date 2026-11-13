@@ -476,8 +476,10 @@ pytest -m "not slow"     # skip the slow solves
 
 ## Documentation
 
-API documentation is generated with [Sphinx](https://www.sphinx-doc.org) from
-the in-source NumPy-style docstrings.
+The documentation is published at
+<https://kitchingroup.cheme.cmu.edu/jax-kipet/>, rebuilt by CI on every push
+to `main`. It is generated with [Sphinx](https://www.sphinx-doc.org) from the
+in-source NumPy-style docstrings. To build it locally:
 
 ```bash
 # build the HTML docs (uv handles the docs dependencies)

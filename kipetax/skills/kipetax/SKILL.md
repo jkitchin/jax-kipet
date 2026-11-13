@@ -12,6 +12,7 @@ keeps the familiar KIPET `ReactionModel` API but replaces all Pyomo internals
 with [`discopt`](https://github.com/jkitchin/discopt) collocation and the
 [`pounce`](https://github.com/jkitchin/pounce) NLP solver, and runs the ODE
 integration and NLP in float64 JAX (`JAX_ENABLE_X64=1` is set on import).
+Full API reference and notebooks: https://kitchingroup.cheme.cmu.edu/jax-kipet/
 
 ## Setup
 
@@ -83,6 +84,8 @@ print(ro.P, ro.Z)                                       # params, trajectories
 
 - Fixed parameters: `r.parameter('kd', value=0.5, fixed=True)` or `r.fix_parameter('kd')`.
 - Non-concentration states: `r.state('T', value=...)`; constants: `r.constant('Yxs', value=...)`.
+- Element names must be valid Python identifiers (`'A_1'`, not `'1-A'`); anything
+  else raises `ValueError`. Data columns bind to elements by these names.
 - `simulate()` needs `set_time(t_end)`; estimation infers the span from data.
 - Math in ODE expressions: `from kipetax import exp, log, sqrt, sin, cos, tan, log10, abs_`.
 
@@ -148,7 +151,13 @@ ro.P                      # shared names, plus '<experiment>.<local>' for the re
 ro.experiments['run_573K'].S
 ```
 
-- Each experiment keeps its OWN `S`; spectra are never tied across experiments.
+- By default each experiment keeps its OWN `S`. Pass
+  `rs.run_opt(..., shared_spectra=True)` to tie `S` across experiments when they
+  are the same chemistry on one instrument (an amplitude, feed or concentration
+  series): free per-experiment spectra can absorb the very differences that
+  identify the kinetics. It requires an identical wavelength grid and absorbing
+  species in every experiment, and is NOT safe across temperatures, where band
+  shapes drift.
 - Prefer the centered `1/T - 1/T_ref` form: fitting `A` and `Ea` directly is
   badly correlated.
 - `covariance=True` is not implemented for `ReactionSet` yet (it warns).
