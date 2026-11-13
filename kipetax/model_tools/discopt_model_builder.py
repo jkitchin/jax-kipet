@@ -12,6 +12,26 @@ import pandas as pd
 from kipetax.model_tools.proxy_vars import resolve_expression
 
 
+def _balanced_sum(terms):
+    """Sum expression terms pairwise, so the result tree has depth O(log n).
+
+    A least-squares objective has one term per measurement. Folding them left
+    (``total = total + t``) builds a chain as deep as the dataset is long, and
+    discopt walks expression trees recursively, so ~1000 measurements exceeded
+    Python's recursion limit. Pairwise summation keeps the depth at
+    ``ceil(log2 n)`` (11 for 2000 terms) and adds the same terms.
+    """
+    terms = list(terms)
+    if not terms:
+        raise ValueError("cannot sum an empty list of terms")
+    while len(terms) > 1:
+        paired = [terms[i] + terms[i + 1] for i in range(0, len(terms) - 1, 2)]
+        if len(terms) % 2:
+            paired.append(terms[-1])
+        terms = paired
+    return terms[0]
+
+
 def _initial_time(t_min):
     """The collocation domain must start where the initial conditions hold.
 
@@ -535,10 +555,7 @@ class DiscoptModelBuilder:
         obj_terms += self._build_concentration_objective(m, dae, variances)
 
         if obj_terms:
-            total_obj = obj_terms[0]
-            for t in obj_terms[1:]:
-                total_obj = total_obj + t
-            m.minimize(total_obj)
+            m.minimize(_balanced_sum(obj_terms))
         else:
             dummy = m.continuous('_dummy_obj', lb=0, ub=0)
             m.minimize(dummy)

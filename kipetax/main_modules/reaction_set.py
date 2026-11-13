@@ -172,7 +172,8 @@ class ReactionSet:
 
         import discopt.modeling as dm
         from discopt.dae.collocation import DAEBuilder
-        from kipetax.model_tools.discopt_model_builder import solve_local_nlp
+        from kipetax.model_tools.discopt_model_builder import (
+            _balanced_sum, solve_local_nlp)
         from kipetax.model_tools.proxy_vars import resolve_expression
 
         if not self._models:
@@ -353,10 +354,7 @@ class ReactionSet:
 
         # Set combined objective
         if all_obj_terms:
-            total = all_obj_terms[0]
-            for t in all_obj_terms[1:]:
-                total = total + t
-            m_combined.minimize(total)
+            m_combined.minimize(_balanced_sum(all_obj_terms))
         else:
             dummy = m_combined.continuous('_dummy', lb=0, ub=0)
             m_combined.minimize(dummy)
