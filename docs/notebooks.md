@@ -23,6 +23,11 @@ Hand-written, step-by-step introductions to the core API.
 - {download}`03_spectral_parameter_estimation <../notebooks/03_spectral_parameter_estimation.ipynb>`
   — estimate from spectral (Beer-Lambert) data, including D-matrix
   reconstruction (D ≈ C·Sᵀ).
+- {download}`04_rate_law_discovery_with_jaxsr <../notebooks/04_rate_law_discovery_with_jaxsr.ipynb>`
+  — discover unknown rate laws (saturation, second order) with
+  [jaxsr](https://github.com/jkitchin/jaxsr) symbolic regression, then refit them
+  with kipetax against the raw trajectories of several experiments. Requires
+  `pip install jaxsr`.
 
 ## Worked examples
 
