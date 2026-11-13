@@ -1,7 +1,7 @@
 # kipetax
 
 ```{include} ../README.md
-:start-after: "# kipetax"
+:start-after: "<!-- docs-start -->"
 :end-before: "## License"
 ```
 

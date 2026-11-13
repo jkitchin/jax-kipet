@@ -66,3 +66,5 @@ intersphinx_mapping = {
 html_theme = "furo"
 html_title = f"kipetax {release}"
 html_static_path = ["_static"]
+html_logo = "_static/kipetax-logo.svg"
+html_favicon = "_static/kipetax-logo.svg"

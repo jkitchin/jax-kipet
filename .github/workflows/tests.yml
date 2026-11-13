@@ -1,0 +1,53 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    # Weekly, against the latest dependency releases: kipetax reaches into
+    # discopt internals that can move between releases.
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+    inputs:
+      slow:
+        description: "Also run the slow tests (NLP solves, >60 s each)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.12", "3.13"]
+    env:
+      MPLBACKEND: Agg
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Install kipetax from a clean environment
+        run: |
+          uv venv --python ${{ matrix.python-version }}
+          uv pip install -e ".[dev]"
+          uv pip list | grep -iE "^(discopt|pounce-solver|jax) "
+
+      - name: Fast tests
+        if: ${{ !inputs.slow }}
+        run: .venv/bin/python -m pytest -m "not slow" -q
+
+      - name: Full test suite (including slow)
+        if: ${{ inputs.slow }}
+        run: .venv/bin/python -m pytest -q

@@ -1,4 +1,15 @@
-# kipetax
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/_static/kipetax-logo-landscape-dark.svg">
+    <img alt="kipetax: kinetic parameter estimation" src="docs/_static/kipetax-logo-landscape.svg" width="460">
+  </picture>
+</p>
+
+<p align="center">
+  <a href="https://github.com/jkitchin/jax-kipet/actions/workflows/tests.yml"><img alt="Tests" src="https://github.com/jkitchin/jax-kipet/actions/workflows/tests.yml/badge.svg?branch=main"></a>
+</p>
+
+<!-- docs-start -->
 
 **Kinetic Parameter Estimation Toolkit** — a Pyomo-free rewrite of
 [KIPET](https://github.com/kwmcbride/KIPET) built on
