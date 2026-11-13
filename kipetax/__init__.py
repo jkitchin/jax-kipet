@@ -18,7 +18,7 @@ from kipetax.main_modules.mixture_model import MixtureModel
 # Proxy math functions available in ODE expressions
 from kipetax.model_tools.proxy_vars import exp, log, sqrt, sin, cos, tan, log10, abs_
 
-__version__ = '2.0.0'
+__version__ = '0.1.0'
 __all__ = [
     'ReactionModel',
     'ReactionSet',

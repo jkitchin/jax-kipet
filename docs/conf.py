@@ -14,7 +14,7 @@ from importlib.metadata import version as _version
 try:
     release = _version("kipetax")
 except Exception:
-    release = "2.0.0"
+    release = "0.1.0"
 version = release
 
 # -- General configuration ---------------------------------------------------
