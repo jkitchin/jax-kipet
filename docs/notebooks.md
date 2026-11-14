@@ -24,10 +24,11 @@ Hand-written, step-by-step introductions to the core API.
   — estimate from spectral (Beer-Lambert) data, including D-matrix
   reconstruction (D ≈ C·Sᵀ).
 - {download}`04_rate_law_discovery_with_jaxsr <../notebooks/04_rate_law_discovery_with_jaxsr.ipynb>`
-  — discover unknown rate laws (saturation, second order) with
-  [jaxsr](https://github.com/jkitchin/jaxsr) symbolic regression, then refit them
-  with kipetax against the raw trajectories of several experiments. Requires
-  `pip install jaxsr`.
+  — discover unknown rate laws from spectra alone, with unknown pure-component
+  spectra: MCR-ALS curve resolution, [jaxsr](https://github.com/jkitchin/jaxsr)
+  symbolic regression on the resolved profiles, then a kipetax refit on the raw
+  spectra of several experiments with shared spectra, pruning and trajectory-BIC
+  model selection. Requires `pip install jaxsr`.
 
 ## Worked examples
 
